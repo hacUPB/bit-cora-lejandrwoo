@@ -1,9 +1,10 @@
 ### Considera el siguiente programa:
+
 i = 1
 sum = 0
 sum = sum + i
 i = i + 1
-​
+
 ### La traducción a lenguaje ensamblador del programa anterior es:
 // i = 1
 @i
