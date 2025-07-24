@@ -1,5 +1,5 @@
 19. Analiza el siguiente programa en lenguaje de máquina:
-
+````
     0100000000000000
     1110110000010000
     0000000000010000
@@ -32,5 +32,6 @@
     1111110111001000
     0000000000000100
     1110101010000111
- 
+ ````
 ### ¿Qué hace este programa?
+El programa recorre un arreglo de cuatro elementos almacenados en las direcciones de memoria comenzando en RAM[16]. Usa un contador almacenado en RAM[17] para acceder secuencialmente a cada elemento (índices 0 a 3). Para cada elemento, lee su valor y realiza una comparación. Mientras no se presione ninguna tecla (entrada en la dirección KBD), el contador avanza para procesar el siguiente elemento. Si se detecta una tecla, el contador y el proceso se reinician, comenzando nuevamente desde el primer elemento del arreglo.
