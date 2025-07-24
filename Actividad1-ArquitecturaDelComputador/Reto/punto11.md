@@ -33,6 +33,7 @@
     ```
     
     - ¿Qué hace este programa?
+      Cuenta hacia atrás desde 1000 hasta 0.
     - ¿En qué memoria está almacenada la variable i? ¿En qué dirección de esa memoria?
     - ¿En qué memoria y en qué dirección de memoria está almacenado el comentario //`i = 1000?`
     - ¿Cuál es la primera instrucción del programa anterior? ¿En qué memoria y en qué dirección de memoria está almacenada esa instrucción?
