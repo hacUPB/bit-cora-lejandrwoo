@@ -6,6 +6,7 @@ else R1 = –1
 (LOOP)
 goto LOOP
 ````
+````
  @R0
     D=M            // Carga el valor de R0 en el registro D
     @POS
