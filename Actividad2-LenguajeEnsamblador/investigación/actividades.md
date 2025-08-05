@@ -69,3 +69,11 @@ M=D
     @LOOP
     0;JMP
 
+
+# Actividad 4
+
+Ahora realizarás una nueva variación al programa de la actividad anterior. Si se presiona la letra “d” muestras la imagen que diseñaste en el reto 18. Solo si se presiona la letra “e” borrarás la imagen que se muestra en pantalla.
+
+EL CODIGO ESTA EN "code actividad 4.asm"
+
+<video controls src="NAND2Tetris - Opera 2025-08-05 09-08-23.mp4" title="Title"></video>
