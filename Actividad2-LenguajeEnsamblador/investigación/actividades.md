@@ -18,44 +18,54 @@ Tambien esta el TECLADO con dirección 24576 y el valor de la dirección dice cu
 # ACTIVIDAD 2
 ### Vas a revisar de nuevo el reto 20 de la unidad anterior. Asegúrate de entenderlo, simularlo y experimentar con él antes de continuar con el siguiente reto.
 ````
-// Dirección base de la pantalla en R0
-@SCREEN
-D=A
-@R0
-M=D
 
-(LOOP)
-    // Leer la tecla presionada
-    @KBD
-    D=M
-    @100
-    D=D-A
-    @DRAW
-    D;JEQ         // Si la tecla es 'd' (ASCII 100), saltar a DRAW
-
-    // Si no es 'd' borrar
-    @ERASE
-    0;JMP
-
-(DRAW)
-    // Dibujar una palabra llena en pantalla (16 pixeles en primer palabra)
-    @R0
-    A=M
-    M=-1          // palabra con todos los bits en 1
-    @LOOP
-    0;JMP
-
-(ERASE)
-    // Borrar la palabra
-    @R0
-    A=M
-    M=0
-    @LOOP
-    0;JMP
+Este código dibuja una imagen de 32 filas de altura y 48 píxeles de ancho directamente en la memoria de video de Hack. Usa registros temporales y manipulación de direcciones para recorrer la memoria de pantalla eficientemente. Al final, salta a la dirección de retorno.
 
 
 ````
 
 # ACTIVIDAD 3
 ### Vas a implementar y simular una modificación al reto 20 de la unidad anterior. Si se presiona la letra “d” muestras la imagen que diseñaste en el reto 18. Si no se presiona ninguna tecla, borrarás la imagen.
+
+
+@SCREEN
+D=A
+@R0
+M=D
+
+(LOOP)
+
+    @KBD
+    D=M
+
+
+    @100
+    D=D-A
+
+
+    @DRAW
+    D;JEQ
+
+
+    @ERASE
+    0;JMP
+
+(DRAW)
+   
+    @R0
+    A=M
+    M=-1          
+
+   
+    @LOOP
+    0;JMP
+
+(ERASE)
+ 
+    @R0
+    A=M
+    M=0
+
+    @LOOP
+    0;JMP
 
