@@ -141,5 +141,10 @@ Un puntero almacena la dirección en memoria de un objeto, no el objeto mismo. E
 
 
 # Actividad 6
-El código anterior tiene un problema. ¿Puedes identificar cuál es? ¿Cómo lo solucionarías? Recuerda que deberías poder seleccionar una esfera y moverla con el mouse.
+- El código anterior tiene un problema. ¿Puedes identificar cuál es? ¿Cómo lo solucionarías? Recuerda que deberías poder seleccionar una esfera y moverla con el mouse.
+
+/ Lo que pasa es que el programa no sabe “olvidar” la esfera que ya seleccioné. Como no se libera correctamente, me obliga a buscar otra más grande para que la cambie. El error está en cómo se maneja la lista de esferas y en que el vector de selección siempre mantiene guardada la última referencia.
+
+# Actividad 7
+- Ahora te voy a proponer que reflexiones profundamente sobre el manejo de la memoria en un programa. Se trata de un experimento en el que tienes que analizar por qué está funcionando mal.
 
