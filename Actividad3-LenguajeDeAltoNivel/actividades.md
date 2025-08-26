@@ -148,3 +148,63 @@ Un puntero almacena la dirección en memoria de un objeto, no el objeto mismo. E
 # Actividad 7
 - Ahora te voy a proponer que reflexiones profundamente sobre el manejo de la memoria en un programa. Se trata de un experimento en el que tienes que analizar por qué está funcionando mal.
 
+
+
+# Actividad 8
+Construye un experimento (un programa) en el que puedas crear y dibujar objetos que se almacenan:
+
+- En el `heap`.
+- En el `stack`.
+- En memoria global.
+
+
+
+### Nota
+sí puedes usar el `stack,`pero recuerda que los objetos solo dudarán en el `stack` el tiempo que dure la función que los creó. ¿Hay alguna función en el programa que dure durante toda la ejecución del programa?
+
+</aside>
+
+- ¿Cuándo debo crear objetos en el `heap` y cuándo en memoria global?
+
+Heap
+La memoria dinámica se gestiona con new para crear y delete para liberar. Se utiliza principalmente cuando no sabemos cuántos objetos se necesitarán en tiempo de ejecución o cuando deben existir incluso después de que termine una función. Ejemplos comunes son listas de partículas, enemigos generados en un juego o estructuras que cambian de tamaño.
+
+Pros: Gran adaptabilidad y control sobre la vida de los objetos.
+
+Contras: Riesgo de fugas de memoria si no se liberan correctamente.
+
+Global
+Estas variables se definen fuera de cualquier clase o función. Permanecen activas durante toda la ejecución del programa y pueden accederse desde cualquier lugar del código. Resultan prácticas para datos que deben mantenerse únicos y constantes, como configuraciones generales o un recurso central como la cámara.
+
+Pros: Disponibles en todo momento.
+
+Contras: Pueden provocar dependencias fuertes entre módulos y hacer más difícil la organización del código.
+
+# Actividad 9
+¿Qué sucede cuando presionas la tecla “f”?
+Analiza detalladamente esta parte del código:
+```
+if(!heapObjects.empty()) {
+    delete heapObjects.back();
+    heapObjects.pop_back();
+}
+```
+### ¿Qué ocurre al presionar la tecla “f”?
+Al presionarla, se elimina el punto más reciente agregado, funcionando como una estructura tipo pila (LIFO: Last In, First Out), donde el último en entrar es siempre el primero en retirarse. En la pantalla desaparece el círculo que había sido dibujado de último.
+
+En términos de memoria, se libera el objeto ofVec2f que fue creado dinámicamente en el heap y, después, se retira el puntero correspondiente de la lista (vector).
+
+Revisión del fragmento de código
+
+
+### if(!heapObjects.empty())
+
+Este condicional asegura que solo se intente borrar si el vector contiene elementos. De no estar esa validación, acceder a back() cuando el contenedor está vacío provocaría un comportamiento indefinido.
+
+### delete heapObjects.back();
+
+Llama al destructor de ofVec2f y libera la memoria reservada con new dentro de mousePressed. Cabe resaltar que, en este momento, el puntero aún existe dentro del vector, por lo que podría considerarse “colgante” si no se gestiona a continuación.
+
+### heapObjects.pop_back();
+
+Quita la referencia (puntero) que estaba guardada en el vector, de modo que el contenedor ya no almacena punteros inválidos. Con esto, se completa correctamente el ciclo de liberación.
