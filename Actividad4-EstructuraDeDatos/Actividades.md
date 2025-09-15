@@ -396,3 +396,18 @@ El stack sigue el principio LIFO, entonces el ultimo elemento en estrar es el pr
 ### 5. ¿Cómo podrías modificar el stack para almacenar tipos de datos más complejos (e.g., objetos con múltiples atributos) sin causar problemas de memoria? Reflexiona sobre cómo gestionar adecuadamente la memoria para objetos más complejos y cómo esto afectaría tu implementación actual.
 Usando plantillas template para aceptar cualquier tipo de dato y punteros inteligentes std::unique_ptr para evitar fugas de memoria.
 Con esto permitiria que el stack maneje objetos con múltiples atributos sin necesidad de liberar manualmente la memoria. Tambien habria que ajustar constructores y destructores para garantizar un manejo seguro.
+
+Preguntas de reflexión para la queue:
+
+### 1. ¿Cómo se maneja la memoria en una implementación manual de una queue en C++? Reflexiona sobre cómo se gestionan los nodos al encolar y desencolar elementos y las implicaciones en términos de eficiencia y seguridad.
+La memoria se maneja creando dinámicamente nodos con new al encolar y liberándolos con delete al desencolar. Cada nodo contiene el dato y un puntero al siguiente. Esto da flexibilidad para crecer sin un límite fijo, pero requiere cuidado para evitar fugas de memoria. La eficiencia depende de liberar siempre los nodos usados.
+### 2. ¿Qué desafíos específicos presenta la implementación de una queue en comparación con un stack en términos de gestión de memoria? Considera las diferencias en el manejo de punteros front y rear, y cómo estos afectan el proceso de encolado y desencolado.
+En una queue se deben controlar dos punteros: front y rear, mientras que en un stack solo uno (top). Esto hace que la lógica sea más compleja, ya que se debe actualizar correctamente ambos en cada operación. Un error puede causar pérdida de acceso a los nodos. La gestión cuidadosa de punteros es clave para evitar errores de memoria.
+### 3. ¿Cómo afecta la estructura FIFO (First In, First Out) de una queue a su uso en diferentes tipos de problemas? Analiza cómo la estructura FIFO influye en la resolución de problemas donde el orden de procesamiento es crucial, como en sistemas de colas de espera.
+El orden FIFO asegura que los elementos se procesen en el mismo orden en que llegan. Esto es útil en sistemas de espera, como impresoras, servidores o simulaciones de colas. También permite un flujo justo y predecible de datos. Sin esta estructura, algunos procesos podrían quedar rezagados o desorganizados.
+### 4. ¿Cómo podrías implementar una queue circular y cuál sería su ventaja respecto a una queue lineal en términos de uso de memoria? Reflexiona sobre cómo una queue circular puede mejorar la eficiencia en ciertos contextos y qué cambios serían necesarios en la implementación.
+Una queue circular se implementa haciendo que el último nodo apunte nuevamente al primero, formando un ciclo. Esto permite reutilizar espacios ya liberados en lugar de seguir creciendo linealmente. La ventaja es un mejor uso de la memoria, ya que no se necesita desplazar elementos. El reto es controlar correctamente los punteros front y rear.
+### 5. ¿Qué problemas podrían surgir si no se gestionan correctamente los punteros front y rear en una queue, y cómo podrías evitarlos? Considera posibles errores como la pérdida de referencias a nodos y cómo una gestión cuidadosa de los punteros puede prevenir estos problemas.
+Si los punteros no se actualizan bien, se pueden perder nodos, generando fugas de memoria. También puede romperse la lógica de la cola, quedando inaccesibles datos aún válidos.
+
+# RETO:
