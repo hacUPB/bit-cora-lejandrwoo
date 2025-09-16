@@ -411,3 +411,111 @@ Una queue circular se implementa haciendo que el último nodo apunte nuevamente 
 Si los punteros no se actualizan bien, se pueden perder nodos, generando fugas de memoria. También puede romperse la lógica de la cola, quedando inaccesibles datos aún válidos.
 
 # RETO:
+```
+#include "ofApp.h"
+
+void ofApp::setup() {
+    ofSetWindowShape(800, 800);
+    ofBackground(255);
+    ofNoFill();
+
+    buildCatShape();
+}
+
+void ofApp::update() {}
+
+void ofApp::draw() {
+    ofBackground(255);
+
+    ofPushMatrix();
+    ofTranslate(ofGetWidth() / 2, ofGetHeight() / 2);
+
+ 
+    ofSetLineWidth(3);
+    overlay();
+
+
+    float x = ofMap(ofGetMouseX(), 0, ofGetWidth(), -50, 50);
+    float a = ofMap(ofGetMouseX(), 0, ofGetWidth(), -0.5, 0.5);
+    float s = ofMap(ofGetMouseY(), 0, ofGetHeight(), 0.7, 1.0);
+
+    if (drawMode == 1) ofRotateRad(a);
+    if (drawMode == 2) ofTranslate(x, 0);
+    ofScale(s, s);
+
+    ofSetLineWidth(2);
+    overlay();
+
+   
+    if (abs(ofGetMouseX() - ofGetWidth() / 2) < 50 &&
+        abs(ofGetMouseY() - ofGetHeight() / 2) < 50) {
+        ofSetColor(0, 0, 0, 200);
+        catShape.draw();
+    }
+
+    ofPopMatrix();
+}
+
+void ofApp::overlay() {
+    float w = ofGetWidth() - 100;
+    float h = ofGetHeight() - 100;
+
+    if (drawMode == 1) {
+        for (float i = -w / 2; i < w / 2; i += 5) {
+            ofDrawLine(i, -h / 2, i, h / 2);
+        }
+    }
+    else if (drawMode == 2) {
+        for (float i = 0; i < w; i += 10) {
+            ofDrawEllipse(0, 0, i, i);
+        }
+    }
+}
+
+void ofApp::keyPressed(int key) {
+    if (key == '1') drawMode = 1;
+    if (key == '2') drawMode = 2;
+}
+
+
+void ofApp::buildCatShape() {
+    catShape.clear();
+    catShape.setFilled(true);
+    catShape.setFillColor(ofColor(0));
+
+    catShape.moveTo(-100, 100);
+    catShape.curveTo(-120, 50);
+    catShape.curveTo(-80, -50);
+    catShape.curveTo(-40, -100);
+    catShape.curveTo(0, -120);
+    catShape.curveTo(40, -100);
+    catShape.curveTo(60, -50);
+    catShape.curveTo(80, 0);
+    catShape.curveTo(60, 80);
+    catShape.curveTo(20, 100);
+    catShape.curveTo(-20, 120);
+    catShape.curveTo(-60, 120);
+    catShape.curveTo(-100, 100);
+
+    catShape.close();
+}
+```
+```
+#pragma once
+#include "ofMain.h"
+
+class ofApp : public ofBaseApp {
+public:
+    int drawMode = 1;
+    ofPath catShape; 
+
+    void setup();
+    void update();
+    void draw();
+
+    void overlay();
+
+    void keyPressed(int key);
+    void buildCatShape(); 
+};
+```
