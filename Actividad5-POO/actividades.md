@@ -115,7 +115,9 @@ Los objetos con métodos virtuales suelen ser más grandes porque incluyen el pu
 * Las vtables añaden un nivel de indirección similar, pero gestionan polimorfismo en tiempo de ejecución.
 
 * El impacto en rendimiento suele ser mínimo, pero a gran escala puede importar.
-
+## CAPTURA
+![alt text](<Captura de pantalla 2025-09-24 200141.png>)
+La captura muestra que un objeto con puntero a función ocupa 8 bytes, mientras que uno sin atributos ocupa 1 byte mínimo. Los métodos no se guardan dentro del objeto, sino en la sección de código, y solo influyen en el tamaño cuando son virtuales (por la vtable).
 ## REFLEXIÓN
 ### ¿Dónde residen los datos y métodos de una clase en la memoria?
 Los datos (atributos) viven en el stack o heap según cómo se creen los objetos. Los métodos se guardan en la sección de código del ejecutable.
@@ -125,3 +127,68 @@ Los punteros a función guardan direcciones de funciones y permiten llamadas ind
 
 ### Conclusión
 Comprender estas diferencias ayuda a diseñar sistemas más eficientes: elegir punteros a función para callbacks simples, métodos virtuales para polimorfismo y punteros a métodos miembro cuando se necesita flexibilidad con objetos específicos.
+
+
+# SESION 3
+## Encapsulamiento
+
+### ¿Cómo implementa el compilador el encapsulamiento en C++? Si los miembros privados aún ocupan espacio en el objeto, ¿Qué impide que se acceda a ellos desde fuera de la clase? (Promp Chat)
+El encapsulamiento en C++ lo aplica el compilador a nivel de reglas de acceso, no modificando la memoria. Los miembros privados y protegidos sí existen en el objeto (ocupan espacio), pero el compilador marca un error de compilación si se intenta acceder directamente desde fuera de la clase. Lo que realmente “impide” el acceso no es la memoria, sino las restricciones del compilador en tiempo de compilación.
+![alt text](encap.png)
+* La prueba muestra que solo los atributos publicos pueden modificarse desde fuera de la clase, mientras que los privados y protegidos generan error. Esto confirma como funciona el encapsulamiento en C++.
+## Hackeando el encapsulamiento
+![alt text](hack.png)
+* En este ejemplo se accede a variables privadas mediante punteros y desplazamientos de memoria. Aunque el compilador lo prohibe, la memoria permite leerlos. Esto evidencia que el encapsulamiento es una regla logica.
+### ¿Qué es el encapsulamiento y cuál es su propósito en la programación orientada a objetos?
+En principio es ocultar los detalles internos de una clase y exponer solo lo necesario. Su propósito es proteger los datos de accesos indebidos y mantener la coherencia de los objetos.
+
+### ¿Por qué es importante proteger los datos de una clase y restringir el acceso desde fuera de la misma?
+Porque asi se evita que el codigo externo manipule el estado interno de forma peligrosa o incoherente. Esto da consistencia y reduce los errores.
+
+### ¿Qué significa reinterpret_cast y cómo afecta la seguridad del programa?
+Permite tratar una dirección de memoria como si fuera de otro tipo. Esto puede “bypassear” la seguridad del compilador y romper la abstracción, abriendo la puerta a accesos indebidos y comportamientos indefinidos.
+
+### ¿Por qué crees que se pudo acceder a los miembros privados de MyClass en este experimento, a pesar de que el compilador normalmente lo impediría?
+Porque los modificadores de acceso solo existen en compilación, no en memoria. Internamente los miembros privados estan en memoria junto con los demas, y usando punteros podemos “leerlos” aunque el compilador lo prohiba en C++.
+
+### ¿Cuáles podrían ser las consecuencias de utilizar técnicas como las mostradas en este experimento en un programa real?
+Inconsistencias, corrupcion de memoria, fallos de seguridad (por ejemplo, accesos ilegales a datos sensibles) y código dificil de mantener.
+
+### ¿Qué implicaciones tiene este experimento sobre la confianza en las barreras de encapsulamiento que proporciona C++?
+Demuestra que el encapsulamiento en C++ es una convención del compilador y no una barrera real en memoria. La seguridad depende del programador, no del lenguaje.
+
+## Herencia y memoria
+![alt text](inheritance.png)
+La prueba enseña como un objeto derivado guarda primero los atributos de la clase base y luego los suyos. Esto demuestra la forma lineal y ordenada en que se organiza la herencia en C++.
+### ¿Cómo se organizan los atributos en memoria?
+Los atributos de la clase base se colocan primero en memoria, seguidos de los atributos de la clase derivada.
+
+### ¿Qué sucede si agregamos más niveles de herencia?
+Cada clase agrega sus atributos detras de los de su base, en orden jerarquico. El layout de memoria sigue la cadena de herencia.
+
+
+## Polimorfismo y vtables
+![alt text](polu.png)
+* Aqui se observa que distintas clases (Animal, Dog, Cat) comparten el mismo tamano gracias al puntero de la vtable.
+### ¿Cómo utiliza el programa las vtables para el polimorfismo?
+Cuando una clase tiene metodos virtuales el compilador agrega un puntero oculto (vptr) en cada objeto. Ese puntero apunta a la vtable, una tabla de direcciones de funciones virtuales. Al invocar un método virtual, el programa busca en la vtable y ejecuta la direccion correspondiente.
+
+### ¿Cuál es el impacto en el rendimiento?
+La llamada virtual añade una indireccion extra consultaria la vtable, lo cual es un pequeño costo en comparación con una llamada normal. 
+
+## REFLEXIONES
+### ¿Cómo se implementan internamente el encapsulamiento, la herencia y el polimorfismo?
+* ### Encapsulamiento: 
+Reglas de acceso aplicadas en compilación, pero en memoria los datos privados siguen ahí.
+
+* ### Herencia: 
+Los atributos de la clase base se almacenan antes que los de la derivada en memoria.
+
+* ### Polimorfismo: 
+usa un puntero oculto a la vtable para despachar métodos virtuales dinámicamente.
+### Análisis: ventajas y desventajas en términos de eficiencia y complejidad.
+* ### Ventajas: 
+Abstracción, reutilización de código, flexibilidad.
+
+* ### Desventajas: 
+Sobrecosto en memoria (por vptr), ligera pérdida de rendimiento (llamadas virtuales) y posibilidad de romper encapsulamiento con cast de bajo nivel.
