@@ -153,6 +153,7 @@ Vertex Shader: Se asegura de la alineación de las imágenes.
 Fragment Shader: Usa la máscara para recortar la imagen de colores con un borde difuminado.
 ## Ejemplo 6: 
 <img width="1185" height="810" alt="six" src="https://github.com/user-attachments/assets/9d6e0753-eec5-4c62-aabf-31437163a24a" />
+
 ### ¿Cómo funciona?
 El programa mezcla tres fuentes visuales (un video, camara y una "textura") usando un shader. La mascara que uno mueve con el mouse decide cual de las tres se ve en un recuadro.
 ### ¿Qué resultados obtuviste?
