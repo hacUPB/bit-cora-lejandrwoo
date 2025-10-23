@@ -152,7 +152,19 @@ Vertex Shader: Se asegura de la alineación de las imágenes.
 
 Fragment Shader: Usa la máscara para recortar la imagen de colores con un borde difuminado.
 ## Ejemplo 6: 
+<img width="1185" height="810" alt="six" src="https://github.com/user-attachments/assets/9d6e0753-eec5-4c62-aabf-31437163a24a" />
+### ¿Cómo funciona?
+El programa mezcla tres fuentes visuales (un video, camara y una "textura") usando un shader. La mascara que uno mueve con el mouse decide cual de las tres se ve en un recuadro.
+### ¿Qué resultados obtuviste?
+Pude ver el video corriendo, la imagen estatica y la textura de prueba, pero solo una era visible a la vez en el recuadro, cambiando con la posicion del mouse que controlaba la mascara.
+### ¿Estás usando un vertex shader?
+Si, se usa un vertex shader para manejar la posicion y el tamano de las formas que contienen el video, la imagen y la textura de prueba en la pantalla.
+### ¿Estás usando un fragment shader?
+Si, se usa un fragment shader porque el es el que hace la mezcla de los colores de las tres fuentes (video, imagen, textura de prueba) segun las reglas de la mascara.
+### Analiza el código de los shaders. ¿Qué hace cada uno?
+Vertex Shader: Se encarga de la geometria. Prepara la forma del recuadro para que las tres texturas se dibujen en el lugar correcto.
 
+Fragment Shader: Se encarga del color y la mezcla. Decide que color final poner en cada pixel al comparar el video, la imagen y la textura de prueba, y solo muestra la textura que la mascara le permite ver.
 ## Ejemplo 7:
 <img width="896" height="705" alt="ejemplo7" src="https://github.com/user-attachments/assets/67f14e25-c2d7-40af-b186-e7aba09e71a6" />
 <img width="882" height="660" alt="ejemplo77" src="https://github.com/user-attachments/assets/6483ee83-2422-4198-88b3-b212740f288a" />
