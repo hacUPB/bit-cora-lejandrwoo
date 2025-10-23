@@ -45,3 +45,172 @@ El Z-buffer se usa para saber qué objeto está más cerca de la cámara. Cuando
 
 ### 15. ¿Por qué la GPU tiene que funcionar tan rápido y de manera paralela?
 Porque en una escena 3D hay millones de vértices y píxeles que se calculan al mismo tiempo. Si la GPU trabajara como la CPU (uno por uno), tardaría muchísimo. En cambio, la GPU puede procesar miles de fragmentos y vértices al mismo tiempo, lo que permite que los juegos y animaciones se vean fluidos y en tiempo real.
+
+
+# ACTIVIDAD 2
+## EJEMPLOS
+## Ejemplo 1:
+<img width="857" height="628" alt="ejemplo1" src="https://github.com/user-attachments/assets/c32d74a7-e721-47c8-84bd-bbbf06aa7e14" />
+<img width="902" height="682" alt="ejemplo11" src="https://github.com/user-attachments/assets/738e5ec2-0509-4487-9ae2-cf37401a39d3" />
+
+### ¿Cómo funciona? 
+Cuando se dibuja, el shader toma el control y le aplica un gradiente de color que va del celeste y azul al magenta.
+
+### ¿Qué resultados obtuviste? 
+Obtuve una pantalla llena con un degradado de colores como azules a morado.
+
+### ¿Estás usando un vertex shader? 
+Si, para calcular la posicion de las esquinas del rectangulo.
+
+### ¿Estás usando un fragment shader?
+Si, para decidir el color de cada punto de la pantalla, creando el degradado.
+
+### Analiza el código de los shaders. ¿Qué hace cada uno?
+
+Vertex Shader: Coloca el rectangulo para que llene la pantalla.
+
+Fragment Shader: Pinta un degradado que cambia el color según la posicion.
+
+## Ejemplo 2:
+<img width="1097" height="662" alt="ejemplo2" src="https://github.com/user-attachments/assets/ab3ab674-5f32-45e6-a806-d08ec3122d72" />
+
+### ¿Cómo funciona? 
+Dibuja un plano 3D con una malla azul que se deforma como una ola. El shader controla la forma y puede cambiar el color o giro con el mouse.
+
+### ¿Qué resultados obtuviste? 
+El plano se veía ondulado y hecho de líneas azules, como si fuera una tela moviendose.
+
+### ¿Estás usando un vertex shader? 
+Si, es el que deforma el plano 3D para que se vea como una onda.
+
+### ¿Estás usando un fragment shader? 
+Si, es el que pone el color azul a las líneas de la malla.
+
+### Analiza el código de los shaders. ¿Qué hace cada uno?
+
+Vertex Shader: Mueve los puntos para crear la forma ondulada en 3D.
+
+Fragment Shader: Pinta los píxeles de color azul para la malla.
+## Ejemplo 3:
+<img width="967" height="752" alt="ejemplo3" src="https://github.com/user-attachments/assets/35963d91-098a-4952-b909-c7bfea9c47a4" />
+
+### ¿Cómo funciona?
+Muestra un plano grande con una malla morada. El shader crea un efecto de "burbuja" o distorsión circular en la malla que sigue al mouse.
+
+### ¿Qué resultados obtuviste? 
+Se veía una malla morada cuadriculada, y en el centro, los puntos se separaban y distorsionaban en forma de círculo.
+
+### ¿Estás usando un vertex shader? 
+Sí, para deformar la malla y hacer el efecto de burbuja.
+
+### ¿Estás usando un fragment shader? 
+Sí, para pintar la malla de color morado.
+
+### Analiza el código de los shaders. ¿Qué hace cada uno?
+
+Vertex Shader: Usa la posición del mouse para mover los puntos y deformar la malla.
+
+Fragment Shader: Pone el color morado a los píxeles de la malla.
+## Ejemplo 4:
+<img width="1002" height="712" alt="ejemplo4" src="https://github.com/user-attachments/assets/f64aa442-1655-4d0e-8ba8-91d23a34d2ca" />
+
+### ¿Cómo funciona?
+Carga una imagen de franjas de colores sobre un plano. El shader permite que el plano (y la imagen) se muevan o se desplacen cuando mueves el mouse.
+
+### ¿Qué resultados obtuviste? 
+Vi una imagen de muchas rayas de colores. Al mover el mouse, la textura se desplazaba sobre el plano.
+
+### ¿Estás usando un vertex shader? 
+Sí, para mover la posición del plano y ajustar la imagen con el mouse.
+
+### ¿Estás usando un fragment shader?
+Sí, para aplicar la textura de franjas de colores a la pantalla.
+
+### Analiza el código de los shaders. ¿Qué hace cada uno?
+
+Vertex Shader: Controla la posición y el movimiento de la imagen.
+
+Fragment Shader: Pinta la textura de colores en el área del plano.
+## Ejemplo 5:
+<img width="712" height="533" alt="ejemplo5" src="https://github.com/user-attachments/assets/a7841417-cae3-4c7e-b815-b56b37ebec5b" />
+
+### ¿Cómo funciona? 
+Utiliza dos imágenes: la de franjas de colores y una máscara blanca circular. El shader las mezcla, y la imagen principal solo se ve en la zona blanca de la máscara, creando un borde suave y redondo.
+
+### ¿Qué resultados obtuviste?
+La imagen de franjas de colores solo se veía en un círculo en el centro, con los bordes que se desvanecían a blanco o transparente.
+
+### ¿Estás usando un vertex shader?
+Sí, para colocar bien las dos imágenes para la mezcla.
+
+### ¿Estás usando un fragment shader?
+Sí, es el que combina la imagen de colores con la máscara para hacer el efecto de desvanecimiento circular.
+
+### Analiza el código de los shaders. ¿Qué hace cada uno?
+
+Vertex Shader: Se asegura de la alineación de las imágenes.
+
+Fragment Shader: Usa la máscara para recortar la imagen de colores con un borde difuminado.
+## Ejemplo 6: 
+
+## Ejemplo 7:
+<img width="896" height="705" alt="ejemplo7" src="https://github.com/user-attachments/assets/67f14e25-c2d7-40af-b186-e7aba09e71a6" />
+<img width="882" height="660" alt="ejemplo77" src="https://github.com/user-attachments/assets/6483ee83-2422-4198-88b3-b212740f288a" />
+
+### ¿Cómo funciona?
+Permite dibujar en la pantalla. Lo dibujado actúa como una máscara. Un shader mezcla texturas de fondo (como la de papel y líneas) y solo se ven dentro de lo que dibujaste.
+
+### ¿Qué resultados obtuviste?
+Después de usar T: Al dibujar las letras 'O' y 'F', solo dentro de esas letras se veía una textura de papel rayado, rodeada de un contorno brillante.
+
+### ¿Estás usando un vertex shader?
+Sí, para ordenar y colocar la imagen de fondo y el área de dibujo.
+
+### ¿Estás usando un fragment shader?
+Sí, es el que mezcla la textura de las letras (la máscara) con la textura de fondo de papel.
+
+### Analiza el código de los shaders. ¿Qué hace cada uno?
+
+Vertex Shader: Prepara la forma de las texturas en la pantalla.
+
+Fragment Shader: Usa el dibujo (la máscara) para mostrar una textura e ocultar la otra, creando el efecto de "ventana".
+## Ejemplo 8:
+<img width="903" height="635" alt="ejempl8" src="https://github.com/user-attachments/assets/337d46e8-8db3-4db0-8bc8-37a110b0aa02" />
+
+### ¿Cómo funciona?
+Crea una textura de ruido blanco y negro (estática) que cambia. Esta textura se aplica a un plano 3D ondulado que se mueve. El mouse puede controlar el movimiento o giro.
+
+### ¿Qué resultados obtuviste?
+Se veía una superficie montañosa con una textura de malla gris y ruido. La forma ondulada estaba moviéndose constantemente.
+
+### ¿Estás usando un vertex shader?
+Sí, para crear la forma montañosa y el movimiento de los puntos del plano.
+
+### ¿Estás usando un fragment shader?
+Sí, para aplicar la textura de ruido blanco y negro a la superficie del plano.
+
+### Analiza el código de los shaders. ¿Qué hace cada uno?
+
+Vertex Shader: Modifica la posición de los puntos para crear las ondas y picos 3D.
+
+Fragment Shader: Pinta los píxeles con la textura ruidosa que cambia con el tiempo.
+## Ejemplo 9:
+<img width="782" height="500" alt="ejemplo9" src="https://github.com/user-attachments/assets/cb20e92e-6d0b-4afa-8239-9e9e8ee459d8" />
+
+### ¿Cómo funciona?
+Aplica un desenfoque a la imagen de franjas de colores. Usa dos shaders de fragmento para lograr el blur: uno para lo ancho y otro para lo alto. El mouse controla cuánto se desenfoca.
+
+### ¿Qué resultados obtuviste?
+Después de mover el mouse: La imagen de franjas de colores se veía borrosa y difuminada, como si estuviera fuera de foco.
+
+### ¿Estás usando un vertex shader?
+Sí, solo para colocar la imagen en su sitio antes del desenfoque.
+
+### ¿Estás usando un fragment shader?
+Sí, dos de ellos, para hacer el cálculo de desenfoque real.
+
+### Analiza el código de los shaders. ¿Qué hace cada uno?
+
+shaderBlurX: Difumina los colores en dirección horizontal.
+
+shaderBlurY: Difumina los colores en dirección vertical, completando el efecto borroso.
