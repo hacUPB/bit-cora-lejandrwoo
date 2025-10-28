@@ -227,3 +227,34 @@ Sí, dos de ellos, para hacer el cálculo de desenfoque real.
 shaderBlurX: Difumina los colores en dirección horizontal.
 
 shaderBlurY: Difumina los colores en dirección vertical, completando el efecto borroso.
+
+
+# ACTIVIDAD 3:
+## ¿Qué es un Uniform?
+Un Uniform es una variable global en los shaders (el codigo que dibuja). Su valor es siempre el mismo para todos los pixeles y vertices que se dibujan en una escena. Se usa para pasar datos constantes, como colores base, tiempo o la resolucion de la pantalla. 
+
+## Comunicacion App y Shaders
+La App es el Emisor: Usa una funcion (shader.setUniform...) para enviar un dato (ej., la posicion del raton) a la memoria de la tarjeta grafica, dandole un nombre.
+
+Los Shaders son los Receptores: El codigo GLSL declara una variable uniform con ese mismo nombre. La tarjeta grafica carga el valor enviado por la App en esa variable.
+## MODIFICACIÓN DE CÓDIGO:
+Este código es un Fragment Shader que pinta un degradado de colores calidos (Naranja a Amarillo) en la pantalla. Lo logra tomando la posicion del pixel (x, y) y usandola para aumentar el Rojo y el Verde, mientras elimina el Azul, creando el tono calido.
+```
+OF_GLSL_SHADER_HEADER
+
+out vec4 outputColor;
+
+void main()
+{
+    // Posición del píxel en pantalla
+    float x = gl_FragCoord.x / 1024.0;  
+    float y = gl_FragCoord.y / 768.0; 
+// Gradiente cálido mezclando la posición X e Y
+    float r = 0.5 + 0.5 * x;  // Rojo: alto, aumenta horizontalmente (de 0.5 a 1.0)
+    float g = 0.5 + 0.5 * y;  // Verde: alto, aumenta verticalmente (de 0.5 a 1.0, se combina con el rojo para formar amarillo)
+    float b = 0.0;            // Azul: cero, eliminando los tonos fríos/morados
+    float a = 1.0;
+ outputColor = vec4(r, g, b, a);
+}
+```
+# ACTIVIDAD 4:
