@@ -1,0 +1,41 @@
+# ACTIVIDAD 1
+
+### ¿Qué es un computador moderno?
+Un computador es una maquina que recibe, interpreta y entrega datos.
+
+### ¿Cuales son sus partes?
+- CPU, es el cerebro del computador, ejecuta instrucciones y procesa los datos.
+- RAM, Almacena temporalmente datos y programas que la CPU esta usando.
+- GPU, procesa y genera imagenes para mostrarlas en pantalla.
+- Perifericos de entrada y salida.
+
+# ACTIVIDAD 2
+
+### ¿Qué es entonces un programa?
+Un programa es un conjunto de instrucciones escritas en un lenguaje de programación 
+que le indican a la computadora qué tareas realizar y en qué orden.
+
+### ¿Qué es lenguaje de máquina?
+Es el lenguaje que entiende directamente la CPU. Está compuesto por cadenas de bits 
+(ceros y unos) que representan instrucciones específicas para el hardware.
+
+# ACTIVIDAD 3
+
+### ¿Qué son PC, D y A?
+
+PC (Program Counter): Registro que guarda la dirección de la próxima instrucción a ejecutar.
+
+D (Data Register): Registro que almacena datos temporales para operaciones.
+
+A (Address Register): Registro que guarda direcciones de memoria o también puede almacenar datos
+
+### ¿Para qué los usa la CPU?
+
+- La CPU usa estos registros para controlar la ejecución de instrucciones:
+
+- El PC le dice a la CPU dónde buscar la siguiente instrucción.
+
+- El D permite realizar operaciones aritméticas/lógicas con los datos.
+
+- El A sirve para acceder a direcciones de memoria o como registro de uso general, según la arquitectura.
+
