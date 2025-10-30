@@ -258,3 +258,30 @@ void main()
 }
 ```
 # ACTIVIDAD 4:
+## ¿Qué hace el código del ejemplo?
+El codigo muestra una imagen que muevo y desplazo al mover el mouse. Basicamente, uso shaders para que la imagen reaccione en tiempo real al cursor, logrando un efecto visual interactivo.
+## ¿Cómo funciona el código de aplicación, los shaders y cómo se comunican estos?
+El programa C++ carga la imagen y envia la posicion del mouse a los shaders mediante variables uniform. El vertex shader usa esa posicion para cambiar las coordenadas de la textura y el fragment shader pinta el color final.
+## MODIFICACIONES:
+En el archivo ofApp.cpp se decidio que el programa enviaria un numero llamado "numero de segmentos" al shader. Este numero es el que define la simetria y cuantas veces se debe repetir el patron de la imagen alrededor del centro, como si fueran varios espejos colocados en circulo.
+
+La creacion de la simetria visual sucede en el Fragment Shader. El codigo toma la ubicacion de cada punto de la imagen y la cambia a un formato de angulo y distancia desde el centro. Despues, esa informacion de angulo se modifica con formulas para que la imagen se repita y se refleje segun el numero de segmentos, creando asi el patron circular del caleidoscopio.![alt text](<unnamed (1).jpg>) ![alt text](unnamed.jpg)
+
+```
+ vec2 centerOffset = vec2(0.0, 0.0);
+    pos -= centerOffset;
+    pos *= zoomFactor;
+
+    float r = length(pos);
+    float a = atan(pos.y, pos.x);
+
+    float segmentAngle = 2.0 * PI / numSegments;
+    a = mod(a + angleOffset, 2.0 * PI);
+    a = abs(a - segmentAngle * floor(a / segmentAngle + 0.5));
+    a = abs(a - segmentAngle * 0.5);
+
+    vec2 finalTexCoord = vec2(r * cos(a), r * sin(a));
+
+    finalTexCoord = finalTexCoord + 0.5;
+
+    vec4 textureColor = texture(tex0, finalTexCoord);
