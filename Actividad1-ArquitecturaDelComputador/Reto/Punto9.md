@@ -22,9 +22,12 @@ M=D+M
 D=M+1
 @i
 M=D
+````
+
 ​
 ### ¿Qué hace este programa?
 Suma 1 a una variable llamada sum, y luego le suma 1 a otra variable llamada i. Al final, sum = 1 e i = 2.
+
 ### ¿En qué parte de la memoria RAM está la variable i y sum? ¿Por qué en esas posiciones?
 i y sum están en la memoria desde la posición 16 en adelante (por ejemplo, i = 16, sum = 17) porque Hack 
 guarda las variables nuevas empezando desde la casilla 16.
